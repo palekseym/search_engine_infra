@@ -1,0 +1,21 @@
+---
+# tasks file for gitlab-ci
+
+- name: Get external ip
+  command: 'curl -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip'
+  register: exterlan_ip
+
+- name: Create directory for compose gitlab
+  file:
+    path: /opt/gitlab-ci
+    state: directory
+
+- name: Copy compose file to remote host
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/gitlab-ci/docker-compose.yml
+
+- name: Start Gitlab in Docker
+  docker_service:
+    project_name: gitlab-ci
+    project_src: /opt/gitlab-ci

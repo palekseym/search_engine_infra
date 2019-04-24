@@ -46,6 +46,7 @@ Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.0", GitCom
 
 Необходимо иметь сгенерированный ssh ключ котороый будет применять для подключения к созданных виртуальным машинам и при конфигурированни через ansible.
 ## Создание инфраструктуры
+Необходимо указать свои значения переменных в файле `terraform.tfvars.example` переименовать его в `terraform.tfvars`
 
 Создать кластер kubernetes и вм под gitlab выполнив команду в папке infrastructure
 

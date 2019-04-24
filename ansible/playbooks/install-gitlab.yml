@@ -1,0 +1,8 @@
+---
+- include: init-python.yml
+- name: Install Gitlab-CI
+  hosts: gitlab-ci
+  become: true
+  roles:
+    - geerlingguy.docker
+    - gitlab-ci

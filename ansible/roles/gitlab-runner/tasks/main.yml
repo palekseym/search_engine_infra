@@ -1,0 +1,16 @@
+---
+# tasks file for gitlab-runner
+- name: Create directory for compose gitlab-runner
+  file:
+    path: /opt/gitlab-runner
+    state: directory
+
+- name: Copy compose file to remote host
+  template:
+    src: docker-compose.yml.j2
+    dest: /opt/gitlab-runner/docker-compose.yml
+
+- name: Start Gitlab in Docker
+  docker_service:
+    project_name: gitlab-ci
+    project_src: /opt/gitlab-runner
