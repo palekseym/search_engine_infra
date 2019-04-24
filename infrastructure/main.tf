@@ -75,7 +75,7 @@ resource "google_compute_instance" "gitlab_ci" {
 
 # Отрываем доступ для необходимых портов
 resource "google_compute_firewall" "crawler_firewall" {
-  name    = "crawler_firewall"
+  name    = "crawler-firewall"
   network = "default"
 
   allow {

@@ -83,7 +83,7 @@ ansible-playbook -i inventory playbooks/install-gitlab.yml
 
 <details><summary>Token</summary>
 
-[reddit](https://i.imgur.com/kWdrz6T.png)
+![reddit](https://i.imgur.com/kWdrz6T.png)
 </details>
 
 Токен необходимо указать как переменную в ansible/inventory
