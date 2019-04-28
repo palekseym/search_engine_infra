@@ -1,0 +1,16 @@
+---
+# tasks file for grafana
+
+- name: Create directory for compose grafana
+  file:
+    path: /opt/grafana
+    state: directory
+
+- name: Copy compose file to remote host
+  copy:
+    src: docker-compose.yml
+    dest: /opt/grafana/docker-compose.yml
+
+- name: Start Gitlab in Docker
+  docker_service:
+    project_src: /opt/grafana

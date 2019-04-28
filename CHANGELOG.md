@@ -1,5 +1,14 @@
 # Changelog
 
+## 2019-04-28
+
+### Добавлено
+- Ansible
+  - Добавил роли:
+    - `grafana` - для устновки https://grafana.com/
+  - Добавил playbooks:
+    - `install-grafana.yml` - для устновки роли grafana
+
 ## 2019-04-24
 
 ### Добавлено
