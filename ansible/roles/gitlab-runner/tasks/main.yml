@@ -14,3 +14,6 @@
   docker_service:
     project_name: gitlab-ci
     project_src: /opt/gitlab-runner
+
+- name: Register gitlab-runner in gitlab-ci
+  shell: docker exec gitlab-ci_gitlab-runner_1 gitlab-runner register --non-interactive --url "http://35.192.181.103/" --registration-token "xNTyeuAdGtSTFuWTgNpUkjr" --executor "docker" --docker-image alpine:latest --description "docker-runner-01" --tag-list "docker" --run-untagged="true" --locked="false" --docker-privileged

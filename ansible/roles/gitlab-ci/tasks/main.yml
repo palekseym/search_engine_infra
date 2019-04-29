@@ -15,6 +15,16 @@
     src: docker-compose.yml.j2
     dest: /opt/gitlab-ci/docker-compose.yml
 
+- name: Crate directory for Gitlab-CI config
+  file:
+    path: /srv/gitlab/config
+    state: directory
+
+- name: Copy Gitlab-CI config
+  copy:
+    src: gitlab.rb
+    dest: /srv/gitlab/config/gitlab.rb
+
 - name: Start Gitlab in Docker
   docker_service:
     project_name: gitlab-ci

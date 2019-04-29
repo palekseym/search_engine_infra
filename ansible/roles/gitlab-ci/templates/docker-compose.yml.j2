@@ -8,8 +8,8 @@ services:
     hostname: 'gitlab-ci-web'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://{{ exterlan_ip.stdout }}'
-        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        external_url 'http://{{ exterlan_ip.stdout }}';
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222;
     ports:
       - '80:80'
       - '443:443'
