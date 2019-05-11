@@ -1,9 +1,22 @@
 # Changelog
 
-## 2019-04-29
+## 2019-05-12
+
+### Добавлено
+- Скрипт для автоматического развертывания окружения `makemyhappy.sh`
+- Скрипты для установки в кластер kubernetes:
+  - `kubernetes/install-gitlab_runner.sh` - установка gitlab-runner
+  - `kubernetes/install-helm-to-cluster.sh` - установка helm
+  - `kubernetes/install-monitoring.sh` - установка мониторинга
+
+## 2019-05-02
 
 ### Добавлено
 - Автоматичекая регистрация docker-runner в gitlab-ci
+- Устновка helm в клюстер kubernetes
+
+### Изменено
+- gitlab-runner перенес внуторь kubernetes
 
 ## 2019-04-28
 
