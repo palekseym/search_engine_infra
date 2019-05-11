@@ -1,6 +1,6 @@
 project = "my-project"
 zone = "us-central1-a"
 region = "us-central1"
-public_key_path = "~/.ssh/user_example.pub" # путь к приватному ssh ключу
-private_key_path = "~/.ssh/user_example" # путь к приватному ssh ключу
+public_key_path = "~/.ssh/appuser.pub" # путь к приватному ssh ключу
+private_key_path = "~/.ssh/appuser" # путь к приватному ssh ключу
 cluster_node_count = 3 # количество нод в кластере
