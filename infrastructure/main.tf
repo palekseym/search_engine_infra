@@ -8,10 +8,12 @@ resource "google_container_cluster" "primary" {
   name               = "crawler-cluster"
   zone               = "${var.zone}"
   initial_node_count = "${var.cluster_node_count}"
+  enable_legacy_abac = "true"
 
   # отключим сервисы мониторинга и логирования
   monitoring_service = "none"
   logging_service    = "none"
+
   # При пустых значениях базавая утентификация отлючается
   master_auth {
     username = ""
@@ -29,7 +31,6 @@ resource "google_container_cluster" "primary" {
     }
   }
 
-
   node_config {
     machine_type = "n1-standard-1"
     image_type   = "COS"
@@ -45,6 +46,10 @@ resource "google_container_cluster" "primary" {
       "https://www.googleapis.com/auth/service.management.readonly",
       "https://www.googleapis.com/auth/trace.append",
     ]
+  }
+
+  provisioner "local-exec" {
+    command = "gcloud container clusters get-credentials crawler-cluster --zone ${var.zone} --project ${var.project}"
   }
 }
 
@@ -66,12 +71,9 @@ resource "google_compute_instance" "gitlab_ci" {
   network_interface {
     network = "default"
 
-    access_config {
-    }
+    access_config {}
   }
 }
-
-
 
 # Отрываем доступ для необходимых портов
 resource "google_compute_firewall" "crawler_firewall" {
@@ -80,8 +82,8 @@ resource "google_compute_firewall" "crawler_firewall" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "80", "443", "2222"]
+    ports    = ["22", "80", "443", "2222", "3000"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = ["188.18.246.173/32"]
 }

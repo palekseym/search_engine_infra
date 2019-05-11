@@ -1,6 +1,7 @@
 output "gitlab_ci_external_ip" {
   value = "${google_compute_instance.gitlab_ci.network_interface.0.access_config.0.assigned_nat_ip}"
 }
+
 output "client_certificate" {
   value = "${google_container_cluster.primary.master_auth.0.client_certificate}"
 }

@@ -1,5 +1,10 @@
 ---
 # tasks file for gitlab-runner
+
+- name: Get external ip
+  command: 'curl -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip'
+  register: exterlan_ip
+
 - name: Create directory for compose gitlab-runner
   file:
     path: /opt/gitlab-runner
@@ -14,3 +19,6 @@
   docker_service:
     project_name: gitlab-ci
     project_src: /opt/gitlab-runner
+
+- name: Register gitlab-runner in gitlab-ci
+  shell: docker exec gitlab-ci_gitlab-runner_1 gitlab-runner register --non-interactive --url "http://{{ exterlan_ip.stdout }}/" --registration-token "xNTyeuAdGtSTFuWTgNpUkjr" --executor "docker" --docker-image alpine:latest --description "docker-runner-01" --tag-list "docker" --run-untagged="true" --locked="false" --docker-privileged
