@@ -1,8 +1,0 @@
----
-- include: init-python.yml
-- name: Install Gitlab-runner
-  hosts: gitlab-ci
-  become: true
-  roles:
-    - geerlingguy.docker
-    - gitlab-runner

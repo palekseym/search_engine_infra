@@ -10,5 +10,8 @@ cd ..
 for i in {1..120}; do curl -sf "http://$GITLAB_IP"; if [ $? -eq 0 ]; then echo "Yes";break; fi; echo "Wait start GITLAB on $GITLAB_IP";sleep 1; done
 cd kubernetes
 ./install-helm-to-cluster.sh
+echo ""
 ./install-gitlab_runner.sh
-./install-monitoring.sh
+echo ""
+source ./install-monitoring.sh
+

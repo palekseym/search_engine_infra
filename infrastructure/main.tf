@@ -85,5 +85,5 @@ resource "google_compute_firewall" "crawler_firewall" {
     ports    = ["22", "80", "443", "2222", "3000"]
   }
 
-  source_ranges = ["188.18.246.173/32"]
+  source_ranges = ["0.0.0.0/0"]
 }
