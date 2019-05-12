@@ -1,5 +1,15 @@
 # Changelog
 
+## 2019-05-13
+
+### Добавлено
+- Создал dashboard для отображения метрик приложения и kubernetes кластера
+- Добавил шаблоны dashboard для grafana
+- В скрипт установки сервиса мониторинга `kubernetes/install-monitoring.sh` добавил автоматический импорт dashboard
+### Удалено
+- Удалил роль `gitlab-runner` и плейбук `install-gitlab-runner` ansible для развертывания gitlab-runner, так как это перенесено на установке через helm
+
+
 ## 2019-05-12
 
 ### Добавлено
