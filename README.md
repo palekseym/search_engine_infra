@@ -103,6 +103,8 @@ Web site Prometheuse http://104.198.75.32
 - https://github.com/palekseym/search_engine_ui
 - https://github.com/palekseym/search_engine_crawler
 
+В каждом репозитории создал свой pipeline
+
 ### Деплой приложения
 Можно сделать несколькоми спосабами:
 
