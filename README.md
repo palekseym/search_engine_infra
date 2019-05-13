@@ -99,7 +99,6 @@ Web site Prometheuse http://104.198.75.32
 
 Сделать форк в свой профиль на github репозитории (либо использовать из примера если только для запуска):
 - https://github.com/palekseym/search_engine_rabbitmq
-- https://github.com/palekseym/search_engine_monitoring
 - https://github.com/palekseym/search_engine_deploy
 - https://github.com/palekseym/search_engine_ui
 - https://github.com/palekseym/search_engine_crawler
