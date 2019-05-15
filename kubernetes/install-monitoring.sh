@@ -35,5 +35,5 @@ create_grafana_dashboards
 
 echo ""
 echo "Web site Gitlab-ci: http://$GITLAB_IP"
-echo "Web site Grafana htpp://$GITLAB_IP:3000"
+echo "Web site Grafana http://$GITLAB_IP:3000"
 echo "Web site Prometheuse http://$PROM_EXT_IP"
