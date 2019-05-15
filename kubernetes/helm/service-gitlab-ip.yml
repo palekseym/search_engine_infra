@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: gitlab-ci-ip
+spec:
+  type: ExternalName
+  externalName: 35.224.245.169.sslip.io
