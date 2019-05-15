@@ -1,7 +1,38 @@
 # Финальный проект курса DevOPS
 
+## Что сделано
+
+Созданы репозитории:
+- https://github.com/palekseym/search_engine_infra - скрипты создания инфраструктуры
+- https://github.com/palekseym/search_engine_ui - web интерфейс приложения
+- https://github.com/palekseym/search_engine_crawler - backend приложения
+- https://github.com/palekseym/search_engine_deploy - для деплоя приложения на stage и prod среду
+- https://github.com/palekseym/search_engine_rabbitmq - для создания контейнера с rabbitmq
+
+Настроен gitlab-ci, kubernetes, мониторинг метрик приложения и кластера kubernetes с отображением в grafana.
+
+Pipeline для search_engine_ui и search_engine_crawler включает стадии сборки, тестов, и подготовки версии для релиза.
+
+Pipeline для search_engine_deploy содержит стадии публикации на stage и prod окружение.
+
+## Что Используется:
+- Terraform - для создания инфраструктуры (виртуальных машин, кластер kubernetes)
+- Ansible - для управления и конфигурацией виртуальнымых машинам
+- Gitlab-CI - для CI/CD
+- Prometheus - для сбора метрик
+- Grafana - для визуализации метрик
+- kubernetes - как среда запуска образов для подготовки, тестирования и публикации приложения в stage и prod
+
 ## Предварительная подготовка
-Зарегистрироваться на http://cloud.google.com, https://hub.docker.com/ и https://github.com
+
+### Регистрация на внешних ресурсах
+
+Нужно зарегистрироваться на:
+- http://cloud.google.com
+- https://hub.docker.com
+- https://github.com
+
+### Необходимые инструменты
 
 На рабочей машине должны быть установлены следующие инструменты:
 - ansible https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
@@ -53,8 +84,11 @@ Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.0", GitCom
 ```
 </details>
 
-Необходимо иметь сгенерированный ssh ключ котороый будет применять для подключения к созданных виртуальным машинам и при конфигурированни через ansible.
-SSH ключ должен распологаться тут:
+### Ключ SSH
+
+Необходимо сгенерировать ssh ключ, который будет применяться для подключения к созданным виртуальным машинам и при конфигурировании через ansible.
+
+SSH ключ должен располагаться тут:
   - `~/.ssh/appuser` - приватный ключ
   - `~/.ssh/appuser.pub` - открытый ключ
 
@@ -64,13 +98,18 @@ SSH ключ должен распологаться тут:
 ```
 ./makemyhappy.sh
 ```
-<details><summary>Реквизиты для подключения после выполнения</summary>
+<details><summary>Пример реквизитов для подключения</summary>
 
 ```
 Web site Gitlab-ci: http://35.193.235.156
 Web site Grafana htpp://35.193.235.156:3000
 Web site Prometheuse http://104.198.75.32
 ```
+
+Логины и пароли:
+
+- gitlab-ci - `root:P@ssword`
+- grafana - `admin:secret`
 </details>
 
 В результате подымется:
@@ -93,20 +132,39 @@ Web site Prometheuse http://104.198.75.32
 И создать переменные:
 
 - CI_REGISTRY_USER - логин для доступа к hub.docker.com
-- CI_REGISTRY_PASSWORD - пароль для доступа
+- CI_REGISTRY_PASSWORD - пароль для доступа к hub.docker.com
 
 ### Импорт репозиториев из github в развернутый gitlab
 
-Сделать форк в свой профиль на github репозитории (либо использовать из примера если только для запуска):
+Сделать форк в свой профиль на github репозитории:
 - https://github.com/palekseym/search_engine_rabbitmq
 - https://github.com/palekseym/search_engine_deploy
 - https://github.com/palekseym/search_engine_ui
 - https://github.com/palekseym/search_engine_crawler
 
-В каждом репозитории создал свой pipeline
+#### Создать токен в github для импорта репозиториев в gitlab
+
+В настройка своего профиля https://github.com/settings/applications -> Developer settings -> Personal access tokens -> Generate new token
+Этот токен понядобиться при импорте репозиториев в gitlab
+
+#### Импорт репозиториев в Gitlab
+
+При создании проекта в Gitlab есть возможность нажать Import project -> github
+В появившемся списке выбрать репозитории для импорта:
+
+- search_engine_rabbitmq
+- search_engine_deploy
+- search_engine_ui
+- search_engine_crawler
+
+Импортировать нужно в группу созданную ранее в gitlab <имя_группы>, на шаге `создание грауппы`
 
 ### Деплой приложения
-Можно сделать несколькоми спосабами:
 
-- Приложение развернуть можно вручную инициировав pipeline у проекта search_engine_deploy на развернутом сервере Gitlab-ci
-- Сделать пушь в репозиторий search_engine_deploy на развернутом сервере Gitlab-ci
+На stage окружение можно публиковаться из pipeline'ов приложений search_engine_ui и search_engine_crawler
+![reddit](https://i.imgur.com/Ma4nOz3.png)
+
+
+Публиковаться на prod окружение можно после сборки всех зависимостей в проекте search_engine_deploy
+![reddit](https://i.imgur.com/AQfKHUz.png)
+
